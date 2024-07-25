@@ -65,3 +65,7 @@ If an operation or function is not specified in the ARP file, then Dremio will h
 
 Once the connector has been added, log in to Dremio. Inside Dremio, click on the plus sign to add a new data source, and select HiveJDBC from the list of available sources. In the 'New HiveJDBC Source' window enter the connection string to connect to and click Save (jdbc:hive2://<host>:<port>). 
 
+## TODO:
+- Fix database naming issue
+- Optimize pushdown
+
