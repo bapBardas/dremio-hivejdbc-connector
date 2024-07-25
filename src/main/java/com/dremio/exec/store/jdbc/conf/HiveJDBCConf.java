@@ -96,18 +96,10 @@ public class HiveJDBCConf extends AbstractArpConf<HiveJDBCConf> {
   }
 
   private CloseableDataSource newDataSource() {
-    return DataSources.newGenericConnectionPoolDataSource(
-            DRIVER,
-            toJdbcConnectionString(),
-            "", // Username
-            "", // Password
-            null, // Properties
-            DataSources.CommitMode.DRIVER_SPECIFIED_COMMIT_MODE,
-            maxIdleConns,
-            idleTimeSec
-    );
+    return DataSources.newGenericConnectionPoolDataSource(DRIVER,
+            toJdbcConnectionString(), null, null, null, DataSources.CommitMode.DRIVER_SPECIFIED_COMMIT_MODE,
+            maxIdleConns, idleTimeSec);
   }
-
 
   @Override
   public ArpDialect getDialect() {

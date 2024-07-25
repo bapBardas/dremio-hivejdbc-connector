@@ -2,12 +2,6 @@
 
 It is highly recommended to connect to Dremio using the native Hive Metastore connector, as this will provide the best performance. This Connector will allow you to use a JDBC connection to Hive. 
 
-## Known Issues
-
-When connecting, you will see the list of tables, but not the databases themselves. In order to query the databases properly, you must add the database name in the Dremio query. 
-
-For Example: select * from hive.orders; -> select * from hive."default".orders; Where Hive is the connection name in Dremio and "default" is the database name in hive.
-
 ## Overview
 
 The Advanced Relational Pushdown (ARP) Framework allows for the creation of Dremio plugins for any data source which has a JDBC driver and accepts SQL 
@@ -66,6 +60,5 @@ If an operation or function is not specified in the ARP file, then Dremio will h
 Once the connector has been added, log in to Dremio. Inside Dremio, click on the plus sign to add a new data source, and select HiveJDBC from the list of available sources. In the 'New HiveJDBC Source' window enter the connection string to connect to and click Save (jdbc:hive2://<host>:<port>). 
 
 ## TODO:
-- Fix database naming issue
 - Optimize pushdown
 
