@@ -91,7 +91,7 @@ public class HiveJDBCConf extends AbstractArpConf<HiveJDBCConf> {
             .withFetchSize(fetchSize)
             .withDatasourceFactory(this::newDataSource)
             .clearHiddenSchemas()
-            .addHiddenSchema("SYSTEM")
+            //.addHiddenSchema("SYSTEM")
             .build();
   }
 
