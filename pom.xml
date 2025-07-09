@@ -23,10 +23,11 @@
   <groupId>com.dremio.plugin</groupId>
   <version>${version.dremio}</version>
   <artifactId>dremio-hivejdbc-plugin</artifactId>
-  <name>Dremio Hive JDBC Community Connector</name>
+  <name>Dremio SQLite Community Connector</name>
 
   <properties>
-    <version.dremio>25.0.0-202404051521110861-ed9515a8</version.dremio>
+    <!-- List of provided version can be found in https://download.dremio.com/jdbc-driver/ -->
+    <version.dremio>25.2.0-202410241428100111-a963b970</version.dremio>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
@@ -63,12 +64,11 @@
   <repositories>
     <repository>
       <id>dremio-public</id>
-      <url>http://maven.dremio.com/public/</url>
+      <url>https://maven.dremio.com/public/</url>
     </repository>
     <repository>
       <id>dremio-free</id>
-      <url>http://maven.dremio.com/free/</url>
+      <url>https://maven.dremio.com/free/</url>
     </repository>    
   </repositories>
 </project>
-

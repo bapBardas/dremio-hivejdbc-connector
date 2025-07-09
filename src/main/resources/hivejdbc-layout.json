@@ -15,6 +15,22 @@
             "elements": [
               {
                 "propName": "config.connectionString",
+                "placeholder": "jdbc:hive2://knox-dev2.subdomain.com:443;ssl=1;transportMode=http;httpPath=gateway/cdp-proxy-api/hive;tez.queue.name=queue_name",
+                "validate": {
+                  "isRequired": true
+                }
+              },
+              {
+                "propName": "config.username",
+                "placeholder": "alice",
+                "size": "half",
+                "validate": {
+                  "isRequired": true
+                }
+              },
+              {
+                "propName": "config.password",
+                "size": "half",
                 "validate": {
                   "isRequired": true
                 }

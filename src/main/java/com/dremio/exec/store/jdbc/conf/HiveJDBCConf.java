@@ -18,9 +18,10 @@ package com.dremio.exec.store.jdbc.conf;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import javax.validation.constraints.NotBlank;
-
+import java.util.Base64;
 import com.dremio.exec.catalog.conf.DisplayMetadata;
 import com.dremio.exec.catalog.conf.NotMetadataImpacting;
+import com.dremio.exec.catalog.conf.Secret;
 import com.dremio.exec.catalog.conf.SourceType;
 import com.dremio.exec.store.jdbc.CloseableDataSource;
 import com.dremio.exec.store.jdbc.DataSources;
@@ -48,6 +49,15 @@ public class HiveJDBCConf extends AbstractArpConf<HiveJDBCConf> {
   public String connectionString;
 
   @Tag(2)
+  @DisplayMetadata(label = "Username")
+  public String username;
+
+  @Tag(3)
+  @Secret
+  @DisplayMetadata(label = "Password")
+  public String password;
+
+  @Tag(4)
   @DisplayMetadata(label = "Record fetch size")
   @NotMetadataImpacting
   public int fetchSize = 200;
@@ -62,21 +72,27 @@ public class HiveJDBCConf extends AbstractArpConf<HiveJDBCConf> {
 //  @JsonIgnore
 //  public boolean enableExternalQuery = false;
 
-  @Tag(4)
+  @Tag(5)
   @DisplayMetadata(label = "Maximum idle connections")
   @NotMetadataImpacting
   public int maxIdleConns = 8;
 
-  @Tag(5)
+  @Tag(6)
   @DisplayMetadata(label = "Connection idle time (s)")
   @NotMetadataImpacting
   public int idleTimeSec = 60;
 
   @VisibleForTesting
   public String toJdbcConnectionString() {
-    final String database = checkNotNull(this.connectionString, "Missing connection string.");
 
-    return String.format("%s", database);
+    final String base64Separator = "base64,";
+    final String connectionString = checkNotNull(this.connectionString, "Missing connection string.");
+    final String userString = checkNotNull(this.username, "Missing username.");
+    final String passwordBase64 = checkNotNull(this.password, "Missing password.").substring(this.password.lastIndexOf(base64Separator) + base64Separator.length());
+    final byte[] passwordByte = Base64.getDecoder().decode(passwordBase64);
+    final String passwordString = new String(passwordByte);
+
+    return String.format("%s;user=%s;password=%s;", connectionString, userString, passwordString);
   }
 
   @Override
@@ -91,7 +107,7 @@ public class HiveJDBCConf extends AbstractArpConf<HiveJDBCConf> {
             .withFetchSize(fetchSize)
             .withDatasourceFactory(this::newDataSource)
             .clearHiddenSchemas()
-            .addHiddenSchema("SYSTEM")
+            //.addHiddenSchema("SYSTEM")
             .build();
   }
 

@@ -1,12 +1,14 @@
+# Disclaimer
+
+This project is widely inspired (fork) from https://github.com/brock-acryl/dremio-hivejdbc-connector and is a customization to connect Dremio on a HiveServer2 instance behind a Knox Gateway.
+
 # Dremio Hive JDBC Connector
 
 It is highly recommended to connect to Dremio using the native Hive Metastore connector, as this will provide the best performance. This Connector will allow you to use a JDBC connection to Hive. 
 
 ## Overview
 
-The Advanced Relational Pushdown (ARP) Framework allows for the creation of Dremio plugins for any data source which has a JDBC driver and accepts SQL 
-as a query language. It allows for a mostly code-free creation of a plugin, allowing for modification of queries issued 
-by Dremio using a configuration file.
+The Advanced Relational Pushdown (ARP) Framework allows for the creation of Dremio plugins for any data source which has a JDBC driver and accepts SQL as a query language. More details on this here : https://docs.dremio.com/current/developer/arp-connector/
 
 There are two files that are necessary for creation of an ARP-based plugin: the storage plugin configuration, which 
 is code, and the plugin ARP file, which is a YAML (https://yaml.org/) file.
@@ -55,9 +57,9 @@ If an operation or function is not specified in the ARP file, then Dremio will h
 3. Take the Hive JDBC driver from (https://downloads.cloudera.com/connectors/ClouderaHiveJDBC-2.6.25.1033.zip) and put in in the \dremio\jars\3rdparty folder
 4. Restart Dremio
 
-## Adding a SQLite Source in Dremio
+## Adding a HiveJDBC Source in Dremio
 
-Once the connector has been added, log in to Dremio. Inside Dremio, click on the plus sign to add a new data source, and select HiveJDBC from the list of available sources. In the 'New HiveJDBC Source' window enter the connection string to connect to and click Save (jdbc:hive2://<host>:<port>). 
+Once the connector has been added, log in to Dremio. Inside Dremio, click on the plus sign to add a new data source, and select HiveJDBC from the list of available sources. In the 'New HiveJDBC Source' window enter the connection string, user, password to connect to and click Save (jdbc:hive2://<host>:<port>). 
 
 ## TODO:
 - Optimize pushdown
